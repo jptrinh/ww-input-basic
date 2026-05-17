@@ -106,6 +106,17 @@ export function useInput(props, emit) {
             : props.wwElementState.props.disabled;
     });
 
+    const isInvalid = computed(() => {
+        /* wwEditor:start */
+        if (props.wwEditorState?.isSelected) {
+            return props.wwElementState.states.includes('invalid');
+        }
+        /* wwEditor:end */
+        return props.wwElementState.props.invalid === undefined
+            ? props.content.invalid
+            : props.wwElementState.props.invalid;
+    });
+
     const style = computed(() => {
         const computedStyle = {
             ...wwLib.wwUtils.getTextStyleFromContent(props.content),
@@ -290,6 +301,18 @@ export function useInput(props, emit) {
         { immediate: true }
     );
 
+    watch(
+        isInvalid,
+        value => {
+            if (value) {
+                emit('add-state', 'invalid');
+            } else {
+                emit('remove-state', 'invalid');
+            }
+        },
+        { immediate: true }
+    );
+
     const isFocusVisible = computed(() => {
         /* wwEditor:start */
         if (props.wwEditorState.isSelected) {
@@ -335,6 +358,7 @@ export function useInput(props, emit) {
         inputType,
         isReadonly,
         isDisabled,
+        isInvalid,
         style,
         min,
         max,

@@ -15,6 +15,7 @@ export default {
             'readonly',
             'disabled',
             'required',
+            'invalid',
             'autocomplete',
             'debounce',
             'debounceDelay',
@@ -60,7 +61,7 @@ export default {
             }));
         },
     },
-    states: ['focus', 'focus-visible', 'readonly', 'disabled'],
+    states: ['focus', 'focus-visible', 'readonly', 'disabled', 'invalid'],
     actions: [{ label: 'Focus element', action: 'focusInput' }],
     triggerEvents: [
         { name: 'change', label: { en: 'On change' }, event: { value: '' }, default: true },
@@ -190,6 +191,20 @@ export default {
             bindingValidation: {
                 type: 'boolean',
                 tooltip: 'A boolean that defines if the input is required: `true | false`',
+            },
+            /* wwEditor:end */
+        },
+        invalid: {
+            label: { en: 'Invalid', fr: 'Invalide' },
+            type: 'OnOff',
+            section: 'settings',
+            bindable: true,
+            defaultValue: false,
+            hidden: (content, sidePanelContent, boundProps, wwProps) => !!(wwProps && wwProps.invalid !== undefined),
+            /* wwEditor:start */
+            bindingValidation: {
+                type: 'boolean',
+                tooltip: 'A boolean that defines if the input is in an invalid state: `true | false`',
             },
             /* wwEditor:end */
         },
