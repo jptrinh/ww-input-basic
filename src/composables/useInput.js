@@ -95,6 +95,17 @@ export function useInput(props, emit) {
             : props.wwElementState.props.readonly;
     });
 
+    const isDisabled = computed(() => {
+        /* wwEditor:start */
+        if (props.wwEditorState?.isSelected) {
+            return props.wwElementState.states.includes('disabled');
+        }
+        /* wwEditor:end */
+        return props.wwElementState.props.disabled === undefined
+            ? props.content.disabled
+            : props.wwElementState.props.disabled;
+    });
+
     const style = computed(() => {
         const computedStyle = {
             ...wwLib.wwUtils.getTextStyleFromContent(props.content),
@@ -214,7 +225,7 @@ export function useInput(props, emit) {
     }
 
     function focusInput() {
-        if (isReadonly.value) return;
+        if (isReadonly.value || isDisabled.value) return;
         if (inputRef.value) inputRef.value.focus();
     }
 
@@ -267,6 +278,18 @@ export function useInput(props, emit) {
         }
     );
 
+    watch(
+        isDisabled,
+        value => {
+            if (value) {
+                emit('add-state', 'disabled');
+            } else {
+                emit('remove-state', 'disabled');
+            }
+        },
+        { immediate: true }
+    );
+
     const isFocusVisible = computed(() => {
         /* wwEditor:start */
         if (props.wwEditorState.isSelected) {
@@ -311,6 +334,7 @@ export function useInput(props, emit) {
         step,
         inputType,
         isReadonly,
+        isDisabled,
         style,
         min,
         max,

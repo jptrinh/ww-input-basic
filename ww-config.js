@@ -13,6 +13,7 @@ export default {
             'value',
             'placeholder',
             'readonly',
+            'disabled',
             'required',
             'autocomplete',
             'debounce',
@@ -59,7 +60,7 @@ export default {
             }));
         },
     },
-    states: ['focus', 'focus-visible', 'readonly'],
+    states: ['focus', 'focus-visible', 'readonly', 'disabled'],
     actions: [{ label: 'Focus element', action: 'focusInput' }],
     triggerEvents: [
         { name: 'change', label: { en: 'On change' }, event: { value: '' }, default: true },
@@ -162,6 +163,20 @@ export default {
             bindingValidation: {
                 type: 'boolean',
                 tooltip: 'A boolean that defines if the input is in readonly: `true | false`',
+            },
+            /* wwEditor:end */
+        },
+        disabled: {
+            label: { en: 'Disabled', fr: 'Désactivé' },
+            type: 'OnOff',
+            section: 'settings',
+            bindable: true,
+            defaultValue: false,
+            hidden: (content, sidePanelContent, boundProps, wwProps) => !!(wwProps && wwProps.disabled !== undefined),
+            /* wwEditor:start */
+            bindingValidation: {
+                type: 'boolean',
+                tooltip: 'A boolean that defines if the input is disabled: `true | false`',
             },
             /* wwEditor:end */
         },

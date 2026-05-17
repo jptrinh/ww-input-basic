@@ -113,6 +113,7 @@ export default {
             step,
             inputType,
             isReadonly,
+            isDisabled,
             style,
             min,
             max,
@@ -502,6 +503,7 @@ export default {
             type: inputType.value,
             name: props.wwElementState.name,
             readonly: isReadonly.value || isEditing.value,
+            disabled: isDisabled.value,
             required: props.content.required,
             autocomplete: props.content.autocomplete ? 'on' : 'off',
             placeholder: wwLib.wwLang.getText(props.content.placeholder),
@@ -517,6 +519,7 @@ export default {
             type: props.content.type,
             name: props.wwElementState.name,
             readonly: isReadonly.value || isEditing.value,
+            disabled: isDisabled.value,
             required: props.content.required,
             placeholder: wwLib.wwLang.getText(props.content.placeholder),
             rows: props.content.rows,
@@ -627,6 +630,7 @@ export default {
             step,
             inputType,
             isReadonly,
+            isDisabled,
             style,
             isEditing,
             min,
@@ -722,6 +726,11 @@ export default {
 
     &.-readonly {
         cursor: inherit;
+    }
+
+    &:disabled {
+        pointer-events: none;
+        cursor: not-allowed;
     }
 
     /* wwEditor:start */

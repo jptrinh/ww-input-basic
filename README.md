@@ -17,4 +17,5 @@ Before release, you can check build error by running `npm run build --name="ww-f
 
 ## Changelog
 
-- Add File type
+- 17/05/2026 - Add disabled state
+- 17/05/2026 - Add File type
