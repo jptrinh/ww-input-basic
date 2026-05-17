@@ -734,5 +734,16 @@ export default {
         background-color: transparent;
         width: 100%;
     }
+
+    &[type='file']::file-selector-button {
+        font: inherit;
+        border: none;
+        background-color: transparent;
+        font-weight: 500;
+        color: inherit;
+        height: 100%;
+        padding: 0;
+        margin-right: 0.25rem;
+    }
 }
 </style>

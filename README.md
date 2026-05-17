@@ -1,6 +1,6 @@
 # WW-FORM-INPUT
 
-This is an element for Weweb, to display an input. 
+This is an element for Weweb, to display an input.
 It make the input type and debounce value bindable.
 
 ## Installation
@@ -14,3 +14,7 @@ To serve locally, run `npm run serve --port=[PORT]`, and then go to Weweb editor
 ## Build
 
 Before release, you can check build error by running `npm run build --name="ww-form-input" --type="element"`
+
+## Changelog
+
+- Add File type

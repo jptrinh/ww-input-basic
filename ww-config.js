@@ -129,6 +129,7 @@ export default {
                     { value: 'tel', label: { en: 'Phone', fr: 'Téléphone' } },
                     { value: 'color', label: { en: 'Color', fr: 'Couleur' } },
                     { value: 'currency', label: { en: 'Currency', fr: 'Devise' } },
+                    { value: 'file', label: { en: 'File', fr: 'Fichier' } },
                 ],
             },
             defaultValue: 'text',
