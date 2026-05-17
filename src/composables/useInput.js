@@ -2,6 +2,7 @@ import { computed, ref, watch, nextTick } from 'vue';
 
 export function useInput(props, emit) {
     const isReallyFocused = ref(false);
+    const realFocusVisible = ref(false);
     const isDebouncing = ref(false);
     const inputRef = ref(null);
     let debounceTimeout = null;
@@ -202,6 +203,14 @@ export function useInput(props, emit) {
     function onBlur(event) {
         correctDecimalValue(event);
         isReallyFocused.value = false;
+        realFocusVisible.value = false;
+    }
+
+    function onFocus() {
+        isReallyFocused.value = true;
+        nextTick(() => {
+            realFocusVisible.value = inputRef.value?.matches(':focus-visible') ?? false;
+        });
     }
 
     function focusInput() {
@@ -258,6 +267,27 @@ export function useInput(props, emit) {
         }
     );
 
+    const isFocusVisible = computed(() => {
+        /* wwEditor:start */
+        if (props.wwEditorState.isSelected) {
+            return props.wwElementState.states.includes('focus-visible');
+        }
+        /* wwEditor:end */
+        return realFocusVisible.value;
+    });
+
+    watch(
+        isFocusVisible,
+        value => {
+            if (value) {
+                emit('add-state', 'focus-visible');
+            } else {
+                emit('remove-state', 'focus-visible');
+            }
+        },
+        { immediate: true }
+    );
+
     /* wwEditor:start */
     watch(
         () => props.content.precision,
@@ -289,7 +319,9 @@ export function useInput(props, emit) {
         focusInput,
         selectInput,
         onBlur,
+        onFocus,
         isFocused,
+        isFocusVisible,
         setValue,
     };
 }

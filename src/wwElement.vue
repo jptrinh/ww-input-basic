@@ -31,7 +31,7 @@
                 "
                 @focus="
                     () => {
-                        isReallyFocused = true;
+                        onFocus();
                         onCurrencyFocus();
                     }
                 "
@@ -46,7 +46,7 @@
         class="ww-input-basic"
         :class="{ editing: isEditing }"
         @input="handleManualInput"
-        @focus="isReallyFocused = true"
+        @focus="onFocus"
         @blur="onBlur"
         @keyup.enter="onEnter"
     />
@@ -58,7 +58,7 @@
         :class="[inputClasses]"
         @input="handleManualInput"
         @blur="onBlur"
-        @focus="isReallyFocused = true"
+        @focus="onFocus"
         @click="handleColorInputClick"
         @keyup.enter="onEnter"
     />
@@ -121,6 +121,7 @@ export default {
             focusInput,
             selectInput,
             onBlur,
+            onFocus,
             setValue,
         } = useInput(props, emit);
 
@@ -635,6 +636,7 @@ export default {
             focusInput,
             selectInput,
             onBlur,
+            onFocus,
             /* wwEditor:start */
             selectParentElement,
             /* wwEditor:end */

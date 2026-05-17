@@ -59,7 +59,7 @@ export default {
             }));
         },
     },
-    states: ['focus', 'readonly'],
+    states: ['focus', 'focus-visible', 'readonly'],
     actions: [{ label: 'Focus element', action: 'focusInput' }],
     triggerEvents: [
         { name: 'change', label: { en: 'On change' }, event: { value: '' }, default: true },
