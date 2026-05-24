@@ -758,5 +758,9 @@ export default {
         padding: 0;
         margin-right: 0.25rem;
     }
+
+    &[type='textarea'] {
+        resize: vertical;
+    }
 }
 </style>
